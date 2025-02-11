@@ -1,32 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Category;
 
 use Illuminate\Http\Request;
-use App\Model\Category;
 
 class CategoryController extends Controller
 {
+    //
     public function index()
     {
         $categories = Category::all();
 
         return response()->json([
             'status' => 200,
-            'message' => 'Categories retrieved succesfully',
+            'message' => 'Categories retrieved successfully.',
             'data' => $categories
         ], 200);
     }
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|string|max:255']);
+        $request ->validate(['name' => 'required|string|max:255']);
 
         $category = Category::create($request->all());
 
         return response()->json([
-            'status' => 201,
-            'message' => 'Category created succesfully',
+            'status' => 200,
+            'message' => 'Category created successfully.',
             'data' => $category
         ], 201);
     }
@@ -34,18 +35,18 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
-        
+
         if (!$category) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Category not found',
+                'message' => 'Category not found.',
                 'data' => null
             ], 404);
         }
-        
+
         return response()->json([
             'status' => 200,
-            'message' => 'Category retrieved succesfully',
+            'message' => 'Categories retrieved successfully.',
             'data' => $category
         ], 200);
     }
@@ -57,7 +58,7 @@ class CategoryController extends Controller
         if (!$category) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Category not found',
+                'message' => 'Category not found.',
                 'data' => null
             ], 404);
         }
@@ -67,7 +68,7 @@ class CategoryController extends Controller
 
         return response()->json([
             'status' => 200,
-            'message' => 'Category updated succesfully',
+            'message' => 'Categories retrieved successfully.',
             'data' => $category
         ], 200);
     }
@@ -81,15 +82,15 @@ class CategoryController extends Controller
                 'status' => 404,
                 'message' => 'Category not found.',
                 'data' => null
-            ], 404) ;
-        }   
-        
-        $category—>delete();
-        
+            ], 404);
+        }
+
+        $category->delete();
+
         return response()->json([
             'status' => 200,
-            'message' => 'Category deleted successfully.',
-            'data' => null
-        ], 200) ;
+            'message' => 'Categories retrieved successfully.',
+            'data' => $category
+        ], 200);
     }
 }
